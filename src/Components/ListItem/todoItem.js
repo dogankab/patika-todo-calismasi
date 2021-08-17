@@ -1,14 +1,30 @@
 import React, {Component} from 'react';
-import {View,Text} from "react-native";
+import {View, Text, TouchableOpacity} from "react-native";
+import styles from './todo.style'
 
-const todo = props => {
+const todoItem = props => {
+    const changeButton=()=>{
+       props.itemContent(props.item)
+    }
     return (
         <View>
-            <Text>
-                TO DO COMPONENTS
-            </Text>
+            {props.item.status ?
+           <TouchableOpacity  onPress={changeButton}>
+                <View style={styles.mainTrue}>
+                    <Text style={styles.textTrue}>
+                        {props.item.content}
+                    </Text>
+                </View>
+           </TouchableOpacity>
+        :
+            <View style={styles.mainFalse}>
+                <Text style={styles.textFalse}>
+                     {props.item.content}
+                </Text>
+            </View>
+        }
         </View>
     );
 };
 
-export default todo;
+export default todoItem;
